@@ -6,7 +6,6 @@ import pytest
 from data import url
 
 
-# Фикстура для генерации данных нового курьера и создания курьера
 @pytest.fixture()
 def new_courier():
     def generate_random_string(length):
@@ -37,12 +36,6 @@ def new_courier():
 
     yield response, login_pass
 
-
-# Фикстура для авторизации курьера и получения ID
-@pytest.fixture()
-def authorize_courier(new_courier):
-    response, login_pass = new_courier
-
     payload_login = {
         "login": login_pass[0],
         "password": login_pass[1]
@@ -53,13 +46,6 @@ def authorize_courier(new_courier):
 
     print(f'Курьер с логином {login_pass[0]} получил id={courier_id} и авторизован')
 
-    yield courier_id
-
-
-# Фикстура для удаления курьера
-@pytest.fixture()
-def delete_courier(authorize_courier):
-    courier_id = authorize_courier
     requests.delete(f'{url}/api/v1/courier/{courier_id}')
 
     print(f'Курьер с id={courier_id} был успешно удален.')

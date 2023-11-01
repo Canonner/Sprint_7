@@ -24,7 +24,7 @@ class OrderData:
 
 class CourierData:
     creation_missing_fields = [
-        {"login": "Halsey", "password": "", "firstName": "Bill"},
-        {"login": "","password": "1944", "firstName": "Bill"},
+        {"login": "Halsey", "firstName": "Bill"},
+        {"password": "1944", "firstName": "Bill"},
     ]
 

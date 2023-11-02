@@ -15,6 +15,7 @@ class TestOrderCreation:
                         'Parameterized test, collects color data from data.py file')
     @pytest.mark.parametrize('color', OrderData.colors)
     def test_order_creation_variate_colors(self, color):
-        response = requests.post(f'{url}/api/v1/orders', data=json.dumps(color))
+        OrderData.payload_order["color"] = [color]
+        response = requests.post(f'{url}/api/v1/orders', data=json.dumps(OrderData.payload_order))
         assert response.status_code == 201, f'Failed to create an order with {color}'
         assert "track" in response.text, f'No "track" field in response body'

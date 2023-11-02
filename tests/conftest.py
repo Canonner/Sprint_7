@@ -8,16 +8,13 @@ from data import url
 
 @pytest.fixture()
 def new_courier():
-    def generate_random_string(length):
-        letters = string.ascii_lowercase
-        random_string = ''.join(random.choice(letters) for i in range(length))
-        return random_string
+    letters = string.ascii_lowercase
 
     login_pass = []
 
-    login = generate_random_string(10)
-    password = generate_random_string(10)
-    first_name = generate_random_string(10)
+    login = ''.join(random.choice(letters) for _ in range(10))
+    password = ''.join(random.choice(letters) for _ in range(10))
+    first_name = ''.join(random.choice(letters) for _ in range(10))
 
     payload = {
         "login": login,
@@ -32,8 +29,6 @@ def new_courier():
         login_pass.append(password)
         login_pass.append(first_name)
 
-    print(f'Создан курьер с данными {login_pass}')
-
     yield response, login_pass
 
     payload_login = {
@@ -43,9 +38,4 @@ def new_courier():
 
     login_courier = requests.post(f'{url}/api/v1/courier/login', data=payload_login)
     courier_id = login_courier.json().get("id")
-
-    print(f'Курьер с логином {login_pass[0]} получил id={courier_id} и авторизован')
-
     requests.delete(f'{url}/api/v1/courier/{courier_id}')
-
-    print(f'Курьер с id={courier_id} был успешно удален.')

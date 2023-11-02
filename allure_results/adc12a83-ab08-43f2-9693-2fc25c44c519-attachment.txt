@@ -1,4 +1,0 @@
-Создан курьер с данными ['kzftumpznk', 'fiwvmjvqqq', 'ytygshkflp']
-{'login': 'kzftumpznk', 'password': 'fiwvmjvqqqa', 'firstName': 'ytygshkflp'}
-Курьер с логином kzftumpznk получил id=230706 и авторизован
-Курьер с id=230706 был успешно удален.
